@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Camwall</title>
+
+   
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,9 +13,21 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-[#1c1733]">
+    
+    <!-- Flash notification messages container -->
+    <div id="flash" class="px-2 fixed top-5 left-1/2 gap-2 -translate-x-1/2 flex flex-col items-center w-max max-w-full">
+      <%= render "layouts/flash" %>
+    </div>
+
+    <!-- Header -->
+    <%= render "layouts/header" %>
+    
+    <!-- Main content -->
+    <main class="w-full">
       <%= yield %>
     </main>
+    
+    
   </body>
 </html>

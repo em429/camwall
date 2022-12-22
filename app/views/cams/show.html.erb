@@ -1,0 +1,49 @@
+<div class="flex mx-auto max-w-[1200px] gap-2">
+
+  <div class="basis-2/5 bg-white p-6 ">
+    <h1 class="text-2xl font-bold mb-2">Cam Info</h1>
+    <ul class="mb-2">
+      <li>
+        <i><%= @cam.city %>, <%= @cam.country_name %></i>
+      </li>
+      <li class="text-xs italic">
+        <%= @cam.longitude %>, <%= @cam.latitude %>
+      </li>
+      <li class="italic">
+        <%= @cam.isp %>
+      </li>
+    </ul>
+    <h2 class="text-lg font-bold mb-2">Stream now:</h2>
+
+    <div class="flex gap-2" data-controller="clipboard" data-clipboard-success-content="COPIED">
+      <input class="font-mono grow text-lime-300 font-bold bg-black p-1 rounded-md"
+             data-clipboard-target="source"
+             value="mpv rtsp://<%= @cam.ip %>/live/ch00_0" readonly>
+      </input>
+      <button class="font-bold text-sm border-2 text-black p-1" type="button"
+              data-action="clipboard#copy" data-clipboard-target="button">COPY</button>
+    </div>
+
+    <hr class="my-8 h-px bg-violet-300 border-0">
+
+    <% if @cam.favorite %>
+      <%= button_to "REMOVE FROM FAVORITES", add_favorite_cam_path, class: "btn-dark" %>
+    <% else %>
+      <%= button_to "FAVORITE", add_favorite_cam_path, class: "btn-dark" %>
+    <% end %>
+    
+  </div>
+
+  <div div-data-placeholder class="w-[500px] bg-white p-6 grow bg-slate-300">
+    <div class="flex mb-2 space-x-4 items-baseline w-fit">
+      <h1 class="text-2xl font-bold">Screenshot</h1>
+      <span class="bg-slate-500 px-1 rounded-sm text-slate-100 text-xs italic">captured on <%= @cam.shodan_timestamp %></span>
+    </div>
+    <img class="" src="data:image/png;base64, <%= @cam.screenshot %>" alt="<%= @cam.city + ", " + @cam.country_name %>" />
+  </div>
+
+
+<div>
+
+
+

@@ -1,0 +1,9 @@
+<% flash.each do |flash_type, message| %>
+  <div
+    class="p-2 border animate-appear_then_fade shadow-md bg-violet-100 border-violet-300 border-4 "
+    data-controller="removals"
+    data-action="animationend->removals#remove"
+  >
+    <%= message %>
+  </div>
+<% end %>

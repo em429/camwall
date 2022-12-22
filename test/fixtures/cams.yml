@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ip: MyString
+  shodan_timestamp: 2022-12-18 19:09:22
+  isp: MyString
+  city: MyString
+  country_name: MyString
+  country_code: MyString
+  longitude: 1.5
+  latitude: 1.5
+  shodan_response: MyText
+  port: 1
+  screenshot: MyString
+
+two:
+  ip: MyString
+  shodan_timestamp: 2022-12-18 19:09:22
+  isp: MyString
+  city: MyString
+  country_name: MyString
+  country_code: MyString
+  longitude: 1.5
+  latitude: 1.5
+  shodan_response: MyText
+  port: 1
+  screenshot: MyString

@@ -1,0 +1,24 @@
+<header class="<%= on_wide_page? ? 'max-w-full px-6' : 'max-w-[1200px]' %>  mt-8 mb-10 mx-auto flex justify-between items-baseline">
+
+  <div class="space-x-4 ">
+  <%= link_to root_path do %>
+    <span
+       class="text-2xl inline-block px-3 py-2 border-8 border-dashed border-t-violet-500 border-r-violet-500 border-l-lime-500 border-b-lime-500  text-violet-500 font-bold">
+       pwnm0r3<span class="text-lime-500">c4m5!</span>
+     </span>
+  <% end %>
+
+   <span class="btn-primary border-violet-500 text-violet-500 text-2xl"><%= Cam.count %></span>
+   <%= link_to "FAVORITES", favorite_cams_path, class: "btn-primary border-violet-500 text-2xl" %>
+   
+  </div>
+  
+  <div>
+     
+    <%= button_to "START NEW PWNJOB", pwn_job_start_path,
+        method: :get,
+        data: { confirm: "PWN those cams for real?" },
+        class: "inline-block text-2xl text-white py-2 px-3 font-bold border-8 border-lime-500"
+     %>
+   </div>
+</header>
