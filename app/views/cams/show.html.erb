@@ -1,18 +1,39 @@
 <div class="flex mx-auto max-w-[1200px] gap-2">
 
   <div class="basis-2/5 bg-white p-6 ">
-    <h1 class="text-2xl font-bold mb-2">Cam Info</h1>
-    <ul class="mb-2">
-      <li>
-        <i><%= @cam.city %>, <%= @cam.country_name %></i>
-      </li>
-      <li class="text-xs italic">
-        <%= @cam.longitude %>, <%= @cam.latitude %>
-      </li>
-      <li class="italic">
-        <%= @cam.isp %>
-      </li>
-    </ul>
+    <div class="mb-4">
+      <h1 class="text-2xl font-bold mb-2">Cam Info</h1>
+      <ul class="mb-2">
+        <li>
+          <%= @cam.city %>, <%= @cam.country_name %>
+        </li>
+        <li class="text-xs italic">
+          <%= @cam.longitude %>, <%= @cam.latitude %>
+        </li>
+      </ul>
+    </div>
+
+    <table class="mb-4">
+      <tbody>
+       
+        <tr>
+          <th>ASN</th>
+          <td><%= @cam.asn %></td>
+        </tr>
+        
+        <tr>
+          <th>ISP</th>
+          <td><%= @cam.isp %></td>
+        </tr>
+        
+        <tr>
+          <th>ORG</th>
+          <td><%= @cam.org %></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    
     <h2 class="text-lg font-bold mb-2">Stream now:</h2>
 
     <div class="flex gap-2" data-controller="clipboard" data-clipboard-success-content="COPIED">
@@ -39,7 +60,8 @@
       <h1 class="text-2xl font-bold">Screenshot</h1>
       <span class="bg-slate-500 px-1 rounded-sm text-slate-100 text-xs italic">captured on <%= @cam.shodan_timestamp %></span>
     </div>
-    <img class="" src="data:image/png;base64, <%= @cam.screenshot %>" alt="<%= @cam.city + ", " + @cam.country_name %>" />
+    <img src="data:<%= @cam.screenshot_mime %>;base64, <%= @cam.screenshot_data %>"
+         alt="<%= @cam.city + ", " + @cam.country_name %>" />
   </div>
 
 
@@ -47,3 +69,15 @@
 
 
 
+<style>
+  table th {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 10px;
+    padding-left: 0;
+    text-align: left;
+  };
+  table td {
+    margin: 10px;
+  };
+</style>

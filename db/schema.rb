@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_20_074436) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_24_220703) do
   create_table "cam_pwn_jobs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,10 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_20_074436) do
     t.float "latitude"
     t.text "shodan_response"
     t.integer "port"
-    t.string "screenshot"
+    t.binary "screenshot_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "favorite", default: false
+    t.string "asn"
+    t.string "org"
+    t.string "os"
+    t.string "screenshot_mime", default: "image/jpeg"
     t.index ["ip"], name: "index_cams_on_ip", unique: true
   end
 

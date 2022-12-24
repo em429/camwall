@@ -5,7 +5,8 @@
     
       <div class="grow w-60">
         <%= link_to(show_cam_url(cam.id)) do %>
-          <img class="h-72 " src="data:image/png;base64, <%= cam.screenshot %>" alt="<%= cam.city + ", " + cam.country_name %>" />
+          <img class="h-72 " src="data:<%= cam.screenshot_mime %>;base64, <%= cam.screenshot_data %>"
+               alt="<%= cam.city + ", " + cam.country_name %>" />
         <% end %>
       </div>
       

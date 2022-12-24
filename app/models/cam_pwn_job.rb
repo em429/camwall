@@ -39,16 +39,19 @@ class CamPwnJob < ApplicationRecord
   def upsert_cam(cam)
     Cam.upsert({
                  ip: cam['ip_str'].to_s,
+                 port: cam['port'],
                  isp: cam['isp'].to_s,
+                 asn: cam['asn'].to_s,
+                 org: cam['org'].to_s,
                  city: cam['location']['city'].to_s,
                  country_name: cam['location']['country_name'].to_s,
                  country_code: cam['location']['country_code'].to_s,
                  screenshot: cam['screenshot']['data'].to_s,
+                 os: cam['os'].to_s,
                  shodan_timestamp: cam['timestamp'],
                  longitude: cam['location']['longitude'],
                  latitude: cam['location']['latitude'],
-                 shodan_response: cam['data'],
-                 port: cam['port']
+                 shodan_response: cam['data']
                },
                unique_by: :ip)
   end
