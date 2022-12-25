@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_24_220703) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_25_160507) do
   create_table "cam_pwn_jobs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,6 +51,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_24_220703) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "shodan_api_keys", force: :cascade do |t|
+    t.string "key"
+    t.string "plan"
+    t.integer "query_credit_limit"
+    t.integer "scan_credit_limit"
+    t.integer "monitored_ip_limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_shodan_api_keys_on_key", unique: true
   end
 
 end

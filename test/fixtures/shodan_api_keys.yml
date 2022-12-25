@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key: MyString
+  plan: MyString
+  query_credit_limit: 1
+  scan_credit_limit: 1
+  monitored_ip_limit: 1
+
+two:
+  key: MyString
+  plan: MyString
+  query_credit_limit: 1
+  scan_credit_limit: 1
+  monitored_ip_limit: 1

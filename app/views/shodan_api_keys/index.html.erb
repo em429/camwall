@@ -1,0 +1,33 @@
+<div class="flex flex-wrap p-8 mx-auto max-w-[1200px] bg-white gap-4 justify-between">
+  
+  <div class="p-2 smallcaps text-center mx-auto border border-4 border-slate-200 rounded-lg w-full items-baseline">
+    <%= link_to "+ check keys", new_shodan_api_key_path, class: "block text-md font-medium text-slate-400" %>
+  
+  </div>
+  
+  <% if @shodan_api_keys %>
+
+     <% @shodan_api_keys.each do |key| %> 
+       
+       <div class="p-2 <%= key.plan == 'edu' ? 'gold' : '' %>">
+          <%= link_to(shodan_api_key_url(key.id)) do %>
+            <span class="text-2xl font-bold text-violet-800"><%= key.key %></span>
+          <% end %>
+        <br>
+        <div class="pt-1 text-sm text-slate-600">
+          <span class="font-bold">&ldquo;<%= key.plan %></span>&rdquo;<span class="text-slate-500"> &mdash;</span>
+          <span class="smallcaps">query</span>: <%= number_with_delimiter(key.query_credit_limit) %> <span class="text-slate-500">&bull;</span>
+          <span class="smallcaps">scan</span>: <%= number_with_delimiter(key.scan_credit_limit) %> <span class="text-slate-500">&bull;</span>
+          <span class="smallcaps">ip monitoring</span>: <%= number_with_delimiter(key.monitored_ip_limit) %>
+        </div>   
+      </div>
+
+   <% end %>
+
+  <% end %>
+</div>
+
+<style>
+ .smallcaps { font-variant: small-caps; }
+</style>
+

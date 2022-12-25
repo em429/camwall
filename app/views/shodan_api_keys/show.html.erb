@@ -1,0 +1,10 @@
+<div class="flex flex-wrap p-8 mx-auto max-w-[1200px] bg-white gap-4 justify-between">
+      <span class="text-2xl font-bold text-violet-800"><%= @shodan_api_key.key %></span>
+        <div class="pt-1 text-sm text-slate-600">
+          <span class="font-bold">&ldquo;<%= @shodan_api_key.plan %></span>&rdquo;<span class="text-slate-500"> &mdash;</span>
+          <span class="smallcaps">query</span>: <%= number_with_delimiter(@shodan_api_key.query_credit_limit) %> <span class="text-slate-500">&bull;</span>
+          <span class="smallcaps">scan</span>: <%= number_with_delimiter(@shodan_api_key.scan_credit_limit) %> <span class="text-slate-500">&bull;</span>
+          <span class="smallcaps">ip monitoring</span>: <%= number_with_delimiter(@shodan_api_key.monitored_ip_limit) %>
+        </div>
+</div>
+  

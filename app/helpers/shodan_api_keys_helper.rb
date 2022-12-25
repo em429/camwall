@@ -1,0 +1,2 @@
+module ShodanApiKeysHelper
+end
