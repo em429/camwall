@@ -20,4 +20,12 @@
    @apply p-2 rounded-md bg-red-100 border-2 border-red-300
  }
 
+  code {
+    @apply bg-black text-lime-300 font-bold rounded-md px-2 py-1;
+  }
+
+  .link { @apply text-blue-600 underline }
+
+  .smallcaps { font-variant: small-caps; }
+
 }
