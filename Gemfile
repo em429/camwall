@@ -72,7 +72,10 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+gem 'phlex-rails'
+
 gem 'shodanz'
 
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'countries'
