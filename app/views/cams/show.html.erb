@@ -5,7 +5,7 @@
       <h1 class="text-2xl font-bold mb-2">Cam Info</h1>
       <ul class="mb-2">
         <li>
-          <%= @cam.city %>, <%= @cam.country_name %>
+          <%= ISO3166::Country.new(@cam.country_code).emoji_flag %> <%= @cam.city %>, <%= @cam.country_name %> 
         </li>
         <li class="text-xs italic">
           <%= @cam.longitude %>, <%= @cam.latitude %>

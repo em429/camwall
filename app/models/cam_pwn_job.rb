@@ -10,15 +10,20 @@ class CamPwnJob < ApplicationRecord
     title_camera: %(title:camera)
   }.freeze
 
-  def fetch_new_cams
-    client = Shodanz.client.new(key: SHODAN_API_KEY)
+  def fetch_new_cams(shodan_api_key, query)
+    # client = Shodanz.client.new(key: shodan_api_key)
 
-    Rails.logger.debug 'Fetching new Cams..'
+    Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
+    Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
+    Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
 
-    client.host_search('has_screenshot:true port:554', page: rand(1..30))['matches']
+    # client.host_search(query, page: rand(1..30))['matches']
+    [[]]
   end
 
   def confirm_cam(cam)
+    # TODO: temporary 'brake' for develepoment! remove it later L=
+    return []
     cmd = "ffprobe -v quiet -print_format json -show_streams rtsp://#{cam['ip_str']}/live/ch00_0"
     Rails.logger.debug cmd
     # Rails.logger.debug "Checking #{cam['ip_str']} - #{cam['country_code']}"
@@ -56,8 +61,8 @@ class CamPwnJob < ApplicationRecord
                unique_by: :ip)
   end
 
-  def gather_cams
-    cams = fetch_new_cams
+  def gather_cams(shodan_api_key, query)
+    cams = fetch_new_cams(shodan_api_key, query)
 
     cams.each do |cam|
       # Confirm the cam works
@@ -67,7 +72,7 @@ class CamPwnJob < ApplicationRecord
       # Skip to next cam if response is empty
       next unless r.any?
 
-      Rails.logger.debug "Inserting camera: #{cam['ip_str']}"
+      Rails.logger.debug "Upserting camera: #{cam['ip_str']}"
       upsert_cam(cam)
     end
   end
