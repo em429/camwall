@@ -1,7 +1,4 @@
 class CamPwnJob < ApplicationRecord
-  # SHODAN_API_KEY = ENV['SHODAN_API_KEY'] || 'RwhzAhS33ZTwpx8Q9hxAP5ZWxQdsBf1q'
-  SHODAN_API_KEY = ENV['SHODAN_API_KEY'] || 'ULAqZuKzub6waFpbmlpvrLdek5QDsXYB'
-
   QUERIES = {
     android_webcam_server: %(title:"Android Webcam Server"),
     has_screenshot_port_554: %(has_screenshot:true port:554),
@@ -11,22 +8,22 @@ class CamPwnJob < ApplicationRecord
   }.freeze
 
   def fetch_new_cams(shodan_api_key, query)
-    # client = Shodanz.client.new(key: shodan_api_key)
+    client = Shodanz.client.new(key: shodan_api_key)
 
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
 
-    # client.host_search(query, page: rand(1..30))['matches']
-    [[]]
+    client.host_search(query, page: rand(1..30))['matches']
+    ## [[]]
   end
 
   def confirm_cam(cam)
     # TODO: temporary 'brake' for develepoment! remove it later L=
-    return []
+    # return []
     cmd = "ffprobe -v quiet -print_format json -show_streams rtsp://#{cam['ip_str']}/live/ch00_0"
     Rails.logger.debug cmd
-    # Rails.logger.debug "Checking #{cam['ip_str']} - #{cam['country_code']}"
+    Rails.logger.debug "Checking #{cam['ip_str']} - #{cam['country_code']}"
 
     begin
        status = Timeout.timeout(15) do
