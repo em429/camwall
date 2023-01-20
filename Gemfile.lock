@@ -152,12 +152,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
-    phlex (1.0.0)
-      zeitwerk (~> 2.6)
-    phlex-rails (0.4.2)
-      phlex (>= 1, < 2)
-      rails (>= 6.1, < 8)
-      zeitwerk (~> 2)
     protocol-hpack (1.4.2)
     protocol-http (0.22.9)
     protocol-http1 (0.14.6)
@@ -263,7 +257,6 @@ DEPENDENCIES
   delayed_job_active_record
   erb-formatter
   importmap-rails
-  phlex-rails
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.3)
   selenium-webdriver
