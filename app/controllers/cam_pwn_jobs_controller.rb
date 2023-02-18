@@ -20,9 +20,6 @@ class CamPwnJobsController < ApplicationController
               "#{query} country:#{country} #{extra_filters}"
             end
 
-    # Create a new pwn job, delayed_job works with the existing db, (not w/ extra redis
-    #   like Sidekiq) so it needs a persisted record in the database to work with
-
     # Always run the below async; it is set in the method definition
     CamPwnJob.create.perform(shodan_api_key, query)
 

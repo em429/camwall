@@ -77,5 +77,4 @@ class CamPwnJob < ApplicationRecord
       upsert_cam(cam)
     end
   end
-  handle_asynchronously :perform # always run as a delayed job
 end

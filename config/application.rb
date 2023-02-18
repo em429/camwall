@@ -13,11 +13,10 @@ module Camwall
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.active_job.queue_adapter = :delayed_job
 
     # Built-in adapter: suitable only for small apps, as they are not persistent like
     # Sidekiq or delayed_job would be
-    # config.active_job.queue_adapter = :async
+    config.active_job.queue_adapter = :async
 
     # Configuration for the application, engines, and railties goes here.
     #

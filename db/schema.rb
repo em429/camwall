@@ -39,21 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_083855) do
     t.index ["ip"], name: "index_cams_on_ip", unique: true
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
-  end
-
   create_table "shodan_api_keys", force: :cascade do |t|
     t.string "key"
     t.string "plan"
