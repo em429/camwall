@@ -84,6 +84,7 @@ GEM
       async
     async-pool (0.3.12)
       async (>= 1.25)
+    awesome_print (1.9.2)
     bindex (0.8.1)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
@@ -249,6 +250,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  awesome_print
   bootsnap
   capybara
   countries

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.4'
+ruby '~> 3.1.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
+gem 'rails', '~> 7.0.4.2'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
@@ -64,6 +64,9 @@ group :development do
   # gem "spring"
   
   gem 'erb-formatter'
+  
+  # pretty print objects in console
+  gem 'awesome_print'
 end
 
 group :test do
