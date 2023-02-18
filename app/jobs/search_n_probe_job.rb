@@ -1,4 +1,6 @@
-class CamPwnJob < ApplicationRecord
+class SearchNProbeJob < ApplicationJob
+  queue_as :default
+  
   QUERIES = {
     android_webcam_server: %(title:"Android Webcam Server"),
     has_screenshot_port_554: %(has_screenshot:true port:554),
@@ -12,8 +14,10 @@ class CamPwnJob < ApplicationRecord
 
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
 
+    random_page = rand(1..30)
+
     begin
-      cams = client.host_search(query, page: rand(1..30))['matches']
+      cams = client.host_search(query, page: random_page)['matches']
     rescue RuntimeError => e
       Rails.logger.debug "Error while accessing Shodan API. Please try again later. Message: #{e.message}"
     rescue Exception => e
@@ -33,7 +37,7 @@ class CamPwnJob < ApplicationRecord
       status = Timeout.timeout(15) do
         raw_r = `#{cmd}`
         sleep(1)
-        JSON.parse raw_r
+        JSON.parse raw_r.to_s
       end
     rescue Exception => e
       Rails.logger.debug "Exception! ==> #{e.class} ==> Message: #{e.message}"
@@ -51,7 +55,8 @@ class CamPwnJob < ApplicationRecord
                  city: cam['location']['city'].to_s,
                  country_name: cam['location']['country_name'].to_s,
                  country_code: cam['location']['country_code'].to_s,
-                 screenshot: cam['screenshot']['data'].to_s,
+                 screenshot_data: cam['screenshot']['data'].to_s,
+                 screenshot_mime: cam['screenshot']['mime'].to_s,
                  os: cam['os'].to_s,
                  shodan_timestamp: cam['timestamp'],
                  longitude: cam['location']['longitude'],
@@ -61,9 +66,9 @@ class CamPwnJob < ApplicationRecord
                unique_by: :ip)
   end
 
+  
   def perform(shodan_api_key, query)
     cams = search_shodan(shodan_api_key, query)
-    Rails.logger.debug cams
 
     cams.each do |cam|
       # Confirm the cam works
@@ -77,4 +82,5 @@ class CamPwnJob < ApplicationRecord
       upsert_cam(cam)
     end
   end
+  
 end

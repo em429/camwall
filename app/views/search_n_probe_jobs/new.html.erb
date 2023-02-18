@@ -1,22 +1,17 @@
-
 <div class="flex flex-wrap p-8 mx-auto max-w-[1200px] bg-white gap-4 justify-between">
   
   
   <div class="mx-auto gap-2">
-    
-    <% @cam_pwn_job.errors.full_messages_for(:query).each do |message| %>
-      <div class="error_explanation"><%= message %></div><br>
-    <% end %>
 
-    <h3 class="mb-4 text-2xl font-bold">Start a fresh pwn job</h3>
+    <h3 class="mb-4 text-2xl font-bold">Look for fresh, working cams</h3>
     
-    <%= form_with model: CamPwnJob.new, class: "form" do |form| %>
+    <%= form_with url: search_n_probe_jobs_path, class: "form" do |form| %>
 
-      <%= form.select :query, CamPwnJob::QUERIES, class: "" %>
+      <%= form.select :query, SearchNProbeJob::QUERIES, class: "" %>
       <%= form.select :country, ISO3166::Country.codes.prepend("GLOBAL"), class: "" %>
       <%= form.select :shodan_api_key, ShodanApiKey.all.collect {|key| [key.key, key.key]}, class: "" %>
       <%= form.text_field :extra_filters, placeholder: "Extra Shodan Filters" %>
-      <%= form.submit "PWN", class: "btn-dark p-1 text-sm " %>
+      <%= form.submit "START", class: "btn-dark p-1 text-sm " %>
 
     <% end %>
     

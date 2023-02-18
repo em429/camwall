@@ -8,7 +8,5 @@ Rails.application.routes.draw do
   post 'cams/:id/favorite', to: 'cams#add_favorite', as: 'add_favorite_cam'
   get 'cams/:id', to: 'cams#show', as: 'show_cam'
 
-  resources :cam_pwn_jobs
-
-  # post 'pwn_job/start', to: 'pwn_jobs#start', as: 'pwn_job_start'
+  resources :search_n_probe_jobs
 end

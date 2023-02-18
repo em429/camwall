@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_083855) do
-  create_table "cam_pwn_jobs", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "query"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2022_12_25_160507) do
   create_table "cams", force: :cascade do |t|
     t.string "ip"
     t.datetime "shodan_timestamp", precision: nil
