@@ -14,6 +14,7 @@ class ShodanApiKeysController < ApplicationController
   def create
     key = shodan_api_key_params['key']
 
+    # TODO: move this logic to Model
     # Check key info
     shodan_client = Shodanz.client.new(key: key)
     info = shodan_client.info

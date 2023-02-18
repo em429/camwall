@@ -7,35 +7,38 @@ class CamPwnJob < ApplicationRecord
     title_camera: %(title:camera)
   }.freeze
 
-  def fetch_new_cams(shodan_api_key, query)
+  def search_shodan(shodan_api_key, query)
     client = Shodanz.client.new(key: shodan_api_key)
 
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
-    Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
-    Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
 
-    client.host_search(query, page: rand(1..30))['matches']
-    ## [[]]
+    begin
+      cams = client.host_search(query, page: rand(1..30))['matches']
+    rescue RuntimeError => e
+      Rails.logger.debug "Error while accessing Shodan API. Please try again later. Message: #{e.message}"
+    rescue Exception => e
+      Rails.logger.debug "Exception! ==> #{e.class} ==> Message: #{e.message}"
+    else
+      Rails.logger.debug "Cams successfully retrieved from Shodan page #{random_page}"
+    end
+    
+    cams
   end
 
   def confirm_cam(cam)
-    # TODO: temporary 'brake' for develepoment! remove it later L=
-    # return []
     cmd = "ffprobe -v quiet -print_format json -show_streams rtsp://#{cam['ip_str']}/live/ch00_0"
-    Rails.logger.debug cmd
-    Rails.logger.debug "Checking #{cam['ip_str']} - #{cam['country_code']}"
+    Rails.logger.debug "Checking #{cam['ip_str']} - #{cam['location']['country_code']}"
 
     begin
-       status = Timeout.timeout(15) do
-         raw_r = `#{cmd}`
-         sleep(0.5)
-         JSON.parse raw_r
-       end
-    rescue StandardError => e
-      Rails.logger.debug 'Exception!'
-      Rails.logger.debug e
+      status = Timeout.timeout(15) do
+        raw_r = `#{cmd}`
+        sleep(1)
+        JSON.parse raw_r
+      end
+    rescue Exception => e
+      Rails.logger.debug "Exception! ==> #{e.class} ==> Message: #{e.message}"
       JSON.parse '{}'
-     end
+    end
   end
 
   def upsert_cam(cam)
@@ -58,8 +61,9 @@ class CamPwnJob < ApplicationRecord
                unique_by: :ip)
   end
 
-  def gather_cams(shodan_api_key, query)
-    cams = fetch_new_cams(shodan_api_key, query)
+  def perform(shodan_api_key, query)
+    cams = search_shodan(shodan_api_key, query)
+    Rails.logger.debug cams
 
     cams.each do |cam|
       # Confirm the cam works
@@ -69,9 +73,9 @@ class CamPwnJob < ApplicationRecord
       # Skip to next cam if response is empty
       next unless r.any?
 
-      Rails.logger.debug "Upserting camera: #{cam['ip_str']}"
+      Rails.logger.debug "Working cam found! #{cam['ip_str']} --> upserting it to database"
       upsert_cam(cam)
     end
   end
-  handle_asynchronously :gather_cams # always run as a delayed job
+  handle_asynchronously :perform # always run as a delayed job
 end

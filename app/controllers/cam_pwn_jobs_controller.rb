@@ -13,6 +13,7 @@ class CamPwnJobsController < ApplicationController
     extra_filters = pwn_job_params['extra_filters']
     query = pwn_job_params['query']
 
+    # TODO: move this logic to CamPwnJob
     query = if country == 'GLOBAL'
               "#{query} #{extra_filters}"
             else
@@ -21,12 +22,9 @@ class CamPwnJobsController < ApplicationController
 
     # Create a new pwn job, delayed_job works with the existing db, (not w/ extra redis
     #   like Sidekiq) so it needs a persisted record in the database to work with
-    @cam_pwn_job = CamPwnJob.create(query: query)
 
-    # Always run the below async; it is set in the method definition.
-    # We could just as well do `@cam_pwn_job.delay.gather_cams` here, if we wanted to retain
-    # non-async functionality as well
-    @cam_pwn_job.gather_cams(shodan_api_key, query)
+    # Always run the below async; it is set in the method definition
+    CamPwnJob.create.perform(shodan_api_key, query)
 
     flash[:notice] = 'Started looking for new working webcams in the background..'
 
