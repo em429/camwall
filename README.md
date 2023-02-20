@@ -1,6 +1,6 @@
 # Camwall
 
-.. is a _free_, self-hosted alternative to shodan images, with an additional camera validation step.
+.. is a _free, self-hosted_ alternative to shodan images, with an additional camera validation step.
 
 Images is one of the premium features of Shodan, you need a paid account to use it. This is a self-hosted alternative to it, that works with _only_ a (paid) API key. 
 
