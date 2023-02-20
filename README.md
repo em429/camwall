@@ -1,24 +1,19 @@
-# README
+# Camwall
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+.. is a _free_, self-hosted alternative to shodan images, with an additional camera validation step.
 
-Things you may want to cover:
+Images is one of the premium features of Shodan, you need a paid account to use it. This is a self-hosted alternative to it, that works with _only_ a (paid) API key. 
 
-* Ruby version
+I will keep the acquiring of such API keys for free as an exercise to the reader :)
 
-* System dependencies
+Most of the cams you'd find on Shodan Images don't work btw — they either time out or the channel can't be found. To make sure all cameras collected work, camwall has an additional probing step (hence the `ffmpeg` dependency for `ffprobe`) that validates each camera.
 
-* Configuration
+## Dependencies
 
-* Database creation
+You must have ruby 3.0.* with bundler. 
 
-* Database initialization
+The only extra dependency that won't be installed by bundler is `ffmpeg`. Install that using your package manager.
 
-* How to run the test suite
+## Nix shortcut
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If you use nix (the package manager), there is a `devenv.sh` file that sets up everything.
