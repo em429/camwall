@@ -1,4 +1,4 @@
-# Camwall
+# camwall
 
 .. is a _free, self-hosted_ alternative to shodan images, with an additional camera validation step.
 
