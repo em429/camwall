@@ -9,21 +9,37 @@ class SearchNProbeJob < ApplicationJob
     title_camera: %(title:camera)
   }.freeze
 
-  def search_shodan(shodan_api_key, query)
+  # TODO implement properly
+  PAGES = {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    random: "random"
+  }.freeze
+
+  def search_shodan(shodan_api_key, query, page="1")
     client = Shodanz.client.new(key: shodan_api_key)
 
     Rails.logger.debug "Fetching new cams using:  #{query} and #{shodan_api_key}"
 
-    random_page = rand(1..30)
-
+    if page == "random"
+      selected_page = rand(1..30)
+    else
+      selected_page = page
+    end
+   
     begin
-      cams = client.host_search(query, page: random_page)['matches']
+      cams = client.host_search(query, page: selected_page)['matches']
     rescue RuntimeError => e
       Rails.logger.debug "Error while accessing Shodan API. Please try again later. Message: #{e.message}"
     rescue Exception => e
       Rails.logger.debug "Exception! ==> #{e.class} ==> Message: #{e.message}"
     else
-      Rails.logger.debug "Cams successfully retrieved from Shodan page #{random_page}"
+      Rails.logger.debug "Cams successfully retrieved from Shodan page #{selected_page}"
     end
     
     cams
@@ -67,8 +83,8 @@ class SearchNProbeJob < ApplicationJob
   end
 
   
-  def perform(shodan_api_key, query)
-    cams = search_shodan(shodan_api_key, query)
+  def perform(shodan_api_key, query, page)
+    cams = search_shodan(shodan_api_key, query, page)
 
     cams.each do |cam|
       # Confirm the cam works
