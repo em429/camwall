@@ -40,3 +40,5 @@
 
 node_modules
 */*.kak.*
+.direnv
+.devenv
