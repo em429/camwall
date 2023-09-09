@@ -10,10 +10,10 @@ class CamsController < ApplicationController
   def add_favorite
     @cam = Cam.find(params[:id])
     @cam.favorite = if @cam.favorite
-                      flash[:notice] = 'Cam removed from favorites'
+                      flash[:notice] = 'Cam marked as favorite'
                       false
                     else
-                      flash[:notice] = 'Cam added to favorites'
+                      flash[:notice] = 'Cam unfavorited'
                       true
                     end
     @cam.save
@@ -22,6 +22,6 @@ class CamsController < ApplicationController
   end
 
   def favorites
-    @cams = Cam.where(favorite: true)
+    @cams = Cam.favorites
   end
 end
