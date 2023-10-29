@@ -1,6 +1,6 @@
-<div class="flex flex-wrap p-8 bg-white gap-4 justify-between">
-  
-  <div class="mx-auto gap-2">
+<div class=" p-8 bg-white gap-4 justify-between">
+
+  <div class="mx-auto gap-2 max-w-[500px]">
 
     <h3 class="mb-8 text-2xl font-bold">Look for fresh, working cams</h3>
     
@@ -8,35 +8,35 @@
 
       <div class="mb-6 flex flex-col">
         <%= form.label :query, class: "mb-2 block" %>
-        <%= form.select :query, SearchNProbeJob::QUERIES %>
+        <%= form.text_field :query, placeholder: "e.g. has_screenshot:true port:554" %>
       </div>
       
       <div class="mb-6 flex flex-col">
-        <%= form.label :country, class: " mb-2 block" %>
-        <%= form.select :country, ISO3166::Country.codes.prepend("GLOBAL"), class: "block" %>
-      </div>
-      
-      <div class="mb-6 flex flex-col">
-        <%= form.label :shodan_api_key, class: " mb-2 block" %>
+        <%= form.label :shodan_api_key, "Shodan API Key", class: " mb-2 block" %>
         <%= form.select :shodan_api_key, ShodanApiKey.all.collect {|key| [key.key, key.key]}, class: "block" %>
       </div>
       
       <div class="mb-6 flex flex-col">
-        <%= form.label :page, class: " mb-2 block" %>
-        <%= form.select :page, SearchNProbeJob::PAGES, class: "block" %>
+        <%= form.label :page, "Page (1-30)", class: "mb-2 block" %>
+        <%= form.number_field :page, value: "1", in: 1..30, class: "block" %>
       </div>
       
       <div class="mb-6 flex flex-col">
-        <%= form.label :extra_filters, class: " mb-2 block" %>
-        <%= form.text_field :extra_filters, placeholder: "Extra Shodan Filters" %>
-      </div>
-      
-      <div class="mb-6 flex flex-col">
-        <%= form.submit "START", class: "block  btn-dark p-1 text-sm " %>
+        <%= form.submit "SEARCH", class: "block btn-dark p-1 text-sm" %>
       </div>
 
     <% end %>
-    
+
+    <div class="mt-8 p-4 bg-violet-100 border border-violet-300 text-violet-600">
+      <h4 class="mb-2 text-md font-semibold">Some common webcam queries to try:</h4>
+      <ul class="text-sm list-disc pl-6">
+        <li>has_screenshot:true port:554</li>
+        <li>webcam has_screenshot:true</li>
+        <li>device:webcam</li>
+        <li>title:camera</li>
+      </ul>
+    </div> 
+
   </div>
 
 </div>

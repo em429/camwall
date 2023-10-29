@@ -1,25 +1,6 @@
 class SearchNProbeJob < ApplicationJob
   queue_as :default
   
-  QUERIES = {
-    has_screenshot_port_554: %(has_screenshot:true port:554),
-    webcam_has_screenshot: %(webcam has_screenshot:true),
-    device_webcam: %(device:webcam),
-    title_camera: %(title:camera)
-  }.freeze
-
-  # TODO implement properly
-  PAGES = {
-    "1": "1",
-    "2": "2",
-    "3": "3",
-    "4": "4",
-    "5": "5",
-    "6": "6",
-    "7": "7",
-    random: "random"
-  }.freeze
-
   def search_shodan(shodan_api_key, query, page="1")
     client = Shodanz.client.new(key: shodan_api_key)
 
