@@ -7,18 +7,18 @@ class CamsController < ApplicationController
     @cam = Cam.find(params[:id])
   end
 
-  def add_favorite
+  def toggle_favorite
     @cam = Cam.find(params[:id])
     @cam.favorite = if @cam.favorite
-                      flash[:notice] = 'Cam marked as favorite'
+                      flash[:notice] = 'Cam removed from favorites'
                       false
                     else
-                      flash[:notice] = 'Cam unfavorited'
+                      flash[:notice] = 'Cam marked as favorite'
                       true
                     end
     @cam.save
 
-    redirect_to show_cam_path(@cam)
+    redirect_to cam_path(@cam)
   end
 
   def favorites

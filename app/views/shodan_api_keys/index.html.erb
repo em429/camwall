@@ -1,4 +1,4 @@
-<div class="flex flex-wrap p-8 mx-auto max-w-[1200px] bg-white gap-4 justify-between">
+<div class="flex flex-wrap p-8 bg-white gap-4 justify-between">
   
   <div class="p-2 smallcaps text-center mx-auto border border-4 border-slate-200 rounded-lg w-full items-baseline">
     <%= link_to "+ check keys", new_shodan_api_key_path, class: "block text-md font-medium text-slate-400" %>
@@ -27,6 +27,6 @@
   <% end %>
 </div>
 
-<div class="mt-8 flex flex-wrap p-8 mx-auto max-w-[1200px] bg-violet-100 border-8 border-violet-300 gap-4 justify-between">
-  <span class="text-xl font-medium">To get more keys, query for <code>SHODAN_API_KEY</code> on <a class="link" href="https://github.com/search?q=SHODAN_API_KEY&type=code">GitHub code search</a>, then throw them in the key checker ;)</span>
+<div class="mt-8 flex flex-wrap p-8 bg-violet-100 border-8 border-violet-300 gap-4 justify-between">
+  <span class="text-xl font-medium">One way to find keys is to search for <code>SHODAN_API_KEY</code> on <a class="link" href="https://github.com/search?q=SHODAN_API_KEY&type=code">GitHub</a> and filter for results in code.</span>
 </div>

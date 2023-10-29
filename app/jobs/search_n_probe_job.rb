@@ -2,7 +2,6 @@ class SearchNProbeJob < ApplicationJob
   queue_as :default
   
   QUERIES = {
-    android_webcam_server: %(title:"Android Webcam Server"),
     has_screenshot_port_554: %(has_screenshot:true port:554),
     webcam_has_screenshot: %(webcam has_screenshot:true),
     device_webcam: %(device:webcam),

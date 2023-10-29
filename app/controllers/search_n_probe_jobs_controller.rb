@@ -9,7 +9,9 @@ class SearchNProbeJobsController < ApplicationController
     query = job_params['query']
     page = job_params['page']
 
-    # TODO: move this logic to the job
+    # TODO: instead of doing this check here, let the user pass any query they want in the form
+    # and display tips on how to write a good query, link to the shodan docs, etc.
+    # FIXME: do we even need a separate query and extra_filters field? check on this.
     query = if country == 'GLOBAL'
               "#{query} #{extra_filters}"
             else

@@ -1,4 +1,4 @@
-<div class="flex mx-auto max-w-[1200px] gap-2">
+<div class="flex gap-2">
 
   <div class="basis-2/5 bg-white p-6 ">
     <div class="mb-4">
@@ -47,9 +47,9 @@
     <hr class="my-8 h-px bg-violet-300 border-0">
 
     <% if @cam.favorite %>
-      <%= button_to "REMOVE FROM FAVORITES", add_favorite_cam_path, class: "btn-dark" %>
+      <%= button_to "REMOVE FROM FAVORITES", toggle_favorite_cam_path(@cam), class: "btn-dark" %>
     <% else %>
-      <%= button_to "FAVORITE", add_favorite_cam_path, class: "btn-dark" %>
+      <%= button_to "FAVORITE", toggle_favorite_cam_path(@cam), class: "btn-dark" %>
     <% end %>
     
   </div>

@@ -1,10 +1,10 @@
 <div class="mx-auto justify-center mt-10 flex flex-wrap">
-  <% if @cams %>
+  <% if cams %>
 
-    <% @cams.each do |cam| %>
+    <% cams.each do |cam| %>
     
       <div class="w-96 relative">
-        <%= link_to(show_cam_url(cam.id)) do %>
+        <%= link_to(cam_url(cam)) do %>
           <img class="z-0" src="data:<%= cam.screenshot_mime %>;base64, <%= cam.screenshot_data %>"
                alt="<%= cam.city + ", " + cam.country_name %>" />
         <% end %>
